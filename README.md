@@ -1,6 +1,11 @@
 Elasticsearch-SQL
 =================
 
+1.分支的版本要与数据库的版本一致
+2.from后面是index而不是type
+
+git clone -b elastic5.5.2 https://github.com/cnipr/elasticsearch-sql.git
+
 ### build status
 
 **1.7.6** [![1.7.6 Build Status](https://travis-ci.org/NLPchina/elasticsearch-sql.svg?branch=elastic1.x)](https://travis-ci.org/NLPchina/elasticsearch-sql)

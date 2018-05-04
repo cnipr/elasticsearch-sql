@@ -37,6 +37,32 @@ public class JDBCTests {
         Assert.assertTrue(result.get(0).equals("Heath,39,F"));
     }
 
+
+    @Test
+    public void testJDBC2() throws Exception {
+        Properties properties = new Properties();
+        properties.put("url", "jdbc:elasticsearch://127.0.0.1:9300/");
+        DruidDataSource dds = (DruidDataSource) ElasticSearchDruidDataSourceFactory.createDataSource(properties);
+        Connection connection = dds.getConnection();
+        PreparedStatement ps = connection.prepareStatement("select patent_db,申请号,申请日 from patent where 申请号='CN200510007314.5'");
+        ResultSet resultSet = ps.executeQuery();
+        List<String> result = new ArrayList<String>();
+        while (resultSet.next()) {
+            result.add(resultSet.getString("patent_db") + "," +
+                    resultSet.getString("申请号") + "," +
+                    resultSet.getString("申请日"));
+        }
+
+        for (int i = 0; i < result.size(); i++) {
+            System.out.println(result.get(i));
+        }
+
+        ps.close();
+        connection.close();
+        dds.close();
+
+    }
+
 }
 
 
